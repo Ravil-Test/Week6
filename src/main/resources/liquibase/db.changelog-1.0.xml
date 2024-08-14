@@ -1,0 +1,272 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1.0.0" author="ravil.nurullin">
+        <createTable tableName="audiences">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="VARCHAR(25)" defaultValue="NOT_ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.1" author="ravil.nurullin">
+        <createTable tableName="reports">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="date" type="TIMESTAMP" defaultValue="NOW()">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.2" author="ravil.nurullin">
+        <createTable tableName="reporters">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="age" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="telnumber" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.3" author="ravil.nurullin">
+        <createTable tableName="roles">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.4" author="ravil.nurullin">
+        <createTable tableName="spectators">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="telnumber" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.5" author="ravil.nurullin">
+        <createTable tableName="report_audience">
+            <column name="report_id" type="bigint">
+            </column>
+
+            <column name="audience_id" type="bigint">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.6" author="ravil.nurullin">
+        <createTable tableName="report_reporter">
+            <column name="report_id" type="bigint">
+            </column>
+
+            <column name="reporter_id" type="bigint">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.7" author="ravil.nurullin">
+        <createTable tableName="reporter_audience">
+            <column name="reporter_id" type="bigint">
+            </column>
+
+            <column name="audience_id" type="bigint">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.8" author="ravil.nurullin">
+        <createTable tableName="reporter_roles">
+            <column name="reporter_id" type="bigint">
+            </column>
+
+            <column name="role_id" type="bigint">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.9" author="ravil.nurullin">
+        <createTable tableName="spectator_roles">
+            <column name="spectator_id" type="bigint">
+            </column>
+
+            <column name="role_id" type="bigint">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.10" author="ravil.nurullin">
+        <addForeignKeyConstraint baseColumnNames="report_id"
+                                 baseTableName="report_audience"
+                                 constraintName="fk_report_audience_report"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="reports"/>
+    </changeSet>
+
+    <changeSet id="1.0.11" author="ravil.nurullin">
+        <addForeignKeyConstraint baseColumnNames="audience_id"
+                                 baseTableName="report_audience"
+                                 constraintName="fk_report_audience_audience"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="audiences"/>
+    </changeSet>
+
+    <changeSet id="1.0.12" author="ravil.nurullin">
+        <addForeignKeyConstraint baseColumnNames="report_id"
+                                 baseTableName="report_reporter"
+                                 constraintName="fk_report_reporter_report"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="reports"/>
+    </changeSet>
+
+    <changeSet id="1.0.13" author="ravil.nurullin">
+        <addForeignKeyConstraint baseColumnNames="reporter_id"
+                                 baseTableName="report_reporter"
+                                 constraintName="fk_report_reporter_reporter"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="reporters"/>
+    </changeSet>
+
+    <changeSet id="1.0.14" author="ravil.nurullin">
+        <addForeignKeyConstraint baseColumnNames="reporter_id"
+                                 baseTableName="reporter_audience"
+                                 constraintName="fk_reporter_audience_reporter"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="reporters"/>
+    </changeSet>
+
+    <changeSet id="1.0.15" author="ravil.nurullin">
+        <addForeignKeyConstraint baseColumnNames="audience_id"
+                                 baseTableName="reporter_audience"
+                                 constraintName="fk_reporter_audience_audience"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="audiences"/>
+    </changeSet>
+
+    <changeSet id="1.0.16" author="ravil.nurullin">
+        <addForeignKeyConstraint baseColumnNames="reporter_id"
+                                 baseTableName="reporter_roles"
+                                 constraintName="fk_reporter_roles_reporter"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="reporters"/>
+    </changeSet>
+
+    <changeSet id="1.0.17" author="ravil.nurullin">
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="reporter_roles"
+                                 constraintName="fk_reporter_roles_roles"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="roles"/>
+    </changeSet>
+
+    <changeSet id="1.0.18" author="ravil.nurullin">
+        <addForeignKeyConstraint baseColumnNames="spectator_id"
+                                 baseTableName="spectator_roles"
+                                 constraintName="fk_spectator_roles_spectator"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="spectators"/>
+    </changeSet>
+
+    <changeSet id="1.0.19" author="ravil.nurullin">
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="spectator_roles"
+                                 constraintName="fk_spectator_roles_roles"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="roles"/>
+    </changeSet>
+
+    <changeSet id="1.0.20" author="ravil.nurullin">
+        <insert tableName="roles">
+            <column name="name" value="ROLE_SPECTATOR"/>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="name" value="ROLE_REPORTER"/>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
