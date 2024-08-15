@@ -60,7 +60,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="telnumber" type="bigint">
+            <column name="telnumber" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true"/>
             </column>
 

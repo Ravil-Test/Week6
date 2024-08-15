@@ -26,7 +26,7 @@ public class Reporter extends BaseModel {
     private String description;
 
     @Column(name = "telnumber")
-    private long telNumber;
+    private String telNumber;
 
     @Column(name = "email")
     private String email;
