@@ -64,7 +64,7 @@
                 <constraints nullable="false" unique="true"/>
             </column>
 
-            <column name="email" type="VARCHAR(100)">
+            <column name="email" type="VARCHAR(100)" value="test@test.com">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -257,6 +257,31 @@
     </changeSet>
 
     <changeSet id="1.0.20" author="ravil.nurullin">
+        <!--<insert tableName="reporters">
+            <column name="id" value="1"/>
+        </insert>
+
+        <insert tableName="reporters">
+            <column name="name" value="test"/>
+        </insert>
+
+        <insert tableName="reporters">
+            <column name="age" value="18"/>
+        </insert>
+
+        <insert tableName="reporters">
+            <column name="description" value="testovyi"/>
+        </insert>
+
+        <insert tableName="reporters">
+            <column name="telnumber" value="$2a$12$4YBbH/qOu8FF4TJ5gXtgXe5nVWZToz7sBVL06G.f/YJmoMiPK9Fm."/>
+        </insert>
+
+        <insert tableName="reporters">
+            <column name="email" value="test@test.com"/>
+        </insert>
+        -->
+
         <insert tableName="roles">
             <column name="name" value="ROLE_SPECTATOR"/>
         </insert>
@@ -268,5 +293,31 @@
         <insert tableName="roles">
             <column name="name" value="ROLE_ADMIN"/>
         </insert>
+
+        <!--
+        <insert tableName="reporter_roles">
+            <column name="reporter_id" value="1"/>
+        </insert>
+
+        <insert tableName="reporter_roles">
+            <column name="reporter_id" value="1"/>
+        </insert>
+
+        <insert tableName="reporter_roles">
+            <column name="reporter_id" value="1"/>
+        </insert>
+
+        <insert tableName="reporter_roles">
+            <column name="role_id" value="1"/>
+        </insert>
+
+        <insert tableName="reporter_roles">
+            <column name="role_id" value="2"/>
+        </insert>
+
+        <insert tableName="reporter_roles">
+            <column name="role_id" value="3"/>
+        </insert>
+        -->
     </changeSet>
 </databaseChangeLog>
